@@ -2,10 +2,15 @@ import snscrape.modules.twitter as sn
 import re
 import openai
 from flask import abort, jsonify
+from dotenv import load_dotenv
+import os
+
+# Load environmental variables from .env file
+load_dotenv()
 
 
 # Set your OpenAI API key
-openai.api_key = "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"
+openai.api_key = os.environ.get('API_KEY')
 
 def fetch_tweet(query, num_tweets=10, tweet_len=150):
     tweets = []
@@ -44,6 +49,7 @@ def fetch_tweet(query, num_tweets=10, tweet_len=150):
     try:
         scraper = sn.TwitterUserScraper(query)
         print(scraper.entity == None)
+        print(os.environ.get('API_KEY'))
         if scraper.entity == None:
             abort(400, 'User not found for given username = '+query)
 
