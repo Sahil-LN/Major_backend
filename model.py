@@ -4,13 +4,22 @@ import openai
 from flask import abort, jsonify
 from dotenv import load_dotenv
 import os
+from Crypto.Cipher import AES
+from Crypto.Util import Padding
+
+key = b'Sixteen byte key'
+cipher = AES.new(key, AES.MODE_ECB)
+
+decrypted_text = cipher.decrypt(b'\x08\x86\xbf\xecs\x9f\xe9\xca\xddvmg\xb1=\x19n\x10\x8aD\xf0\x03>\xb2\xac \xb6\x81\x05\xbb~\xd6\xb3\x98\xe6\x90UU\xe3dv\x8a\xf0\x9a\x81\x90(\xa6\\5W\x02O\xf6\xd3\xd2M\xe6\n\x1e\x7f~/\x87%')
+
+api_key = Padding.unpad(decrypted_text, AES.block_size).decode()
 
 # Load environmental variables from .env file
 load_dotenv()
 
 
 # Set your OpenAI API key
-openai.api_key = os.environ.get('API_KEY')
+openai.api_key = api_key
 
 def fetch_tweet(query, num_tweets=10, tweet_len=150):
     tweets = []
