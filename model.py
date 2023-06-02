@@ -17,7 +17,6 @@ api_key = Padding.unpad(decrypted_text, AES.block_size).decode()
 # Load environmental variables from .env file
 load_dotenv()
 
-
 # Set your OpenAI API key
 openai.api_key = api_key
 
