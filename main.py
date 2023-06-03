@@ -5,6 +5,8 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
+app.config['TIMEOUT'] = 300
+
 @app.after_request
 def set_content_type(response):
     response.headers['Content-Type'] = 'application/json'
