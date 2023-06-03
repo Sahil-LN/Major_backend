@@ -57,7 +57,6 @@ def fetch_tweet(query, num_tweets=10, tweet_len=150):
     try:
         scraper = sn.TwitterUserScraper(query)
         print(scraper.entity == None)
-        # print(os.environ.get('API_KEY'))
         if scraper.entity == None:
             abort(400, 'User not found for given username = '+query)
 
