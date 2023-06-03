@@ -65,7 +65,7 @@ def fetch_tweet(query, num_tweets=10, tweet_len=150):
        abort(400, 'User not found for given username = '+query)
 
     try:
-        for tweet in sn.TwitterProfileScraper(query).get_items():
+        for tweet in sn.TwitterProfileScraper(query,maxEmptyPages=200).get_items():
             if counts == num_tweets:
                 break
             else:
